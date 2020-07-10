@@ -1,5 +1,5 @@
 # BosonNER-Data-Pretreatment
-bosonNER data pretreatment 玻森命名实体识别数据集的预处理，按照8:2进行训练集与测试集的切分，标注体系BIOES
+bosonNER data pretreatment 玻森命名实体识别数据集的预处理，按照8:1:1进行训练集、验证集与测试集的切分，标注体系BMES
 
 ## 文件说明
 1. python处理程序执行后，读取data文件夹下的boson数据，处理后在result文件夹生成BIOES标注的训练集与测试集。
