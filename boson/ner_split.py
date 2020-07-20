@@ -12,6 +12,8 @@
 import random
 import os
 import re
+import random
+random.seed(0)
 
 
 # ****************************************************************************** #
@@ -19,16 +21,18 @@ import re
 def paragraph_split(origin_file=None):
     sentences_list, sent_end = [], ['；', '。', '！']
     for line in origin_file.readlines():
-        sentence_items, sent_idx = re.split('([；。！])', line), 0  # 切分句子，保留分隔符
+        sentence_items, sent_idx = re.split('([；。！])', line.strip()), 0  # 切分句子，保留分隔符
         while sent_idx < len(sentence_items):
             if sentence_items[sent_idx] not in sent_end:
                 if sent_idx<len(sentence_items)-2 and sentence_items[sent_idx+1] in sent_end:
                     sentence = sentence_items[sent_idx]+sentence_items[sent_idx+1]
                     sent_idx += 1
                 else:
-                    sentence = sentence_items[sent_idx]
+                    sentence = sentence_items[sent_idx]     # 针对在句尾且无结尾符的句子
+            else:                                           # 对于单个出现的结尾符
+                sentence = sentence_items[sent_idx]
             sent_idx += 1
-            sentences_list.append(sentence)
+            sentences_list.append(sentence.replace(' ', ''))
     
     return sentences_list
 
@@ -69,7 +73,7 @@ def origin2tag(untagged_list=None):
                     for j in range(1, len(entity)-1):
                         tagged_line_str += entity[j]+'/M_'+tag+' '
                     tagged_line_str += entity[-1]+'/E_'+tag+' '
-            else:                   # 对于非实体O标记
+            elif line[i]!=' ':                   # 对于非实体O标记
                 tagged_line_str += line[i]+'/O '
                 i+=1
         tagged_lines_list.append(tagged_line_str)
