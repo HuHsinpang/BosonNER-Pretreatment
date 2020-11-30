@@ -84,7 +84,8 @@ def origin2tag(untagged_file=None):
 def flatten2result(input_list=None, output_file=None):
     for sentence in input_list:
         for char_tag_pair in sentence.rstrip('\n').split():
-            if char_tag_pair[0] == ' ':
+            # if len(char_tag_pair[0].strip()) == 0  or char_tag_pair[0] == ' ' or char_tag_pair[0]=='	' or char_tag_pair[0]==' ' or char_tag_pair[0]=='':
+            if char_tag_pair.lstrip()[0] == '/':
                 continue
             else:
                 output_file.write(char_tag_pair.replace('/', ' ')+'\n')
