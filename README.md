@@ -1,4 +1,4 @@
-# BosonNER-Data-Pretreatment
+# BosonNER-Pretreatment
 bosonNER data pretreatment 玻森命名实体识别数据集的预处理，按照8:1:1进行训练集、验证集与测试集的切分，标注体系BMES
 
 ## 文件说明
